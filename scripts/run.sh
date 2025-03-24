@@ -6,10 +6,21 @@ PROJECT_ROOT="$(dirname "$(dirname "$0")")"
 
 export AMBULANCE_API_ENVIRONMENT="Development"
 export AMBULANCE_API_PORT="8080"
+export AMBULANCE_API_MONGODB_USERNAME="root"
+export AMBULANCE_API_MONGODB_PASSWORD="neUhaDnes"
+
+mongo() {
+    docker compose --file "${PROJECT_ROOT}/deployments/docker-compose/compose.yaml" "$@"
+}
 
 case $command in
     "start")
+        mongo up --detach
+        trap 'mongo down' EXIT
         go run "${PROJECT_ROOT}/cmd/ambulance-api-service"
+        ;;
+    "mongo")
+        mongo up
         ;;
     "openapi")
         docker run --rm -ti -v "${PROJECT_ROOT}:/local" openapitools/openapi-generator-cli generate -c /local/scripts/generator-cfg.yaml
