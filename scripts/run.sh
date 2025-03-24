@@ -17,7 +17,7 @@ case $command in
     "start")
         mongo up --detach
         trap 'mongo down' EXIT
-        go run "${PROJECT_ROOT}/cmd/ambulance-api-service"
+        cd "${PROJECT_ROOT}" && go run ./cmd/ambulance-api-service/main.go
         ;;
     "mongo")
         mongo up
