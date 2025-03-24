@@ -4,7 +4,7 @@ import (
     "net/http"
 
     "github.com/gin-gonic/gin"
-    "github.com/<github-id>/ambulance-webapi/internal/db_service"
+    "github.com/Robert-Prikryl/ambulance-webapi/internal/db_service"
 )
 
 type ambulanceUpdater = func(
