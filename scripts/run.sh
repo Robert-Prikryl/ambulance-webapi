@@ -22,6 +22,9 @@ case $command in
     "mongo")
         mongo up
         ;;
+    "test")
+        go test -v ./...
+        ;;
     "openapi")
         docker run --rm -ti -v "${PROJECT_ROOT}:/local" openapitools/openapi-generator-cli generate -c /local/scripts/generator-cfg.yaml
         ;;
